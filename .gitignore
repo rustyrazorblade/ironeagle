@@ -1,2 +1,3 @@
 ironeagle.egg-info/
 *.pyc
+dist/
