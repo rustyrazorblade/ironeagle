@@ -21,7 +21,7 @@ setup(
         "Programming Language :: Python :: 2.7",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Database",
-        
+
     ],
     keywords='cassandra,cql,pandas',
     install_requires = ['cassandra-driver >= 2.1.0', 'pandas >= 0.15.0'],

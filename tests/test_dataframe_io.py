@@ -12,7 +12,8 @@ def session():
     create = """
               CREATE TABLE IF NOT EXISTS simple (
               id int primary key,
-              name text
+              name text,
+              lat float
               )
               """
 
@@ -27,8 +28,8 @@ def session():
 
 @pytest.fixture
 def df():
-    df = DataFrame.from_records([(1, "jon"), (2, "pete")],
-                                columns=['id', 'name'])
+    df = DataFrame.from_records([(1, "jon", 1.1), (2, "pete", 1.2)],
+                                columns=['id', 'name', 'lat'])
     return df
 
 
@@ -36,7 +37,9 @@ def df():
 def test_get_prepared_statement(df):
     prepared = get_prepared_statement(df, "simple")
     assert "id, name" in prepared
-    assert "(?,?)" in prepared
+    assert "(?,?,?)" in prepared
 
 def test_insert_data(df, session):
     save_dataframe_to_cassandra(session, df, "simple")
+
+
