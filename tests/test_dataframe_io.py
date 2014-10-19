@@ -1,8 +1,7 @@
 from cassandra.cluster import Cluster
 from pandas import DataFrame
 import pytest
-from ironeagle import get_prepared_statement
-
+from ironeagle import get_prepared_statement, save_dataframe_to_cassandra
 
 
 @pytest.fixture
@@ -17,7 +16,7 @@ def session():
               )
               """
 
-    truncate = "truncate table simple"
+    truncate = "truncate simple"
 
     queries = [create, truncate]
 
@@ -39,5 +38,5 @@ def test_get_prepared_statement(df):
     assert "id, name" in prepared
     assert "(?,?)" in prepared
 
-def test_insert_data(df):
-    pass
+def test_insert_data(df, session):
+    save_dataframe_to_cassandra(session, df, "simple")
