@@ -7,12 +7,13 @@ def save_dataframe_to_cassandra(session, dataframe, table):
     :param table:
     :return:
     """
-    statement = get_prepared_statement(session, dataframe, table)
-    session.prepare(statement)
+    statement = get_prepared_statement(dataframe, table)
+
+    prepared = session.prepare(statement)
 
 
 
-def get_prepared_statement(session, dataframe, table):
+def get_prepared_statement(dataframe, table):
     """
 
     :param session:
@@ -28,7 +29,6 @@ def get_prepared_statement(session, dataframe, table):
     placeholders = ",".join(["?"] * len(keys))
 
     stmt = "INSERT INTO %s (%s) VALUES (%s)" % (table, str_keys, placeholders)
-    prepared = session.prepare(stmt)
 
     return stmt
 
