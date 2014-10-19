@@ -16,13 +16,12 @@ setup(
     description='Helper library for working with Pandas and the Cassandra Native Driver',
     long_description=long_desc,
     classifiers = [
-        "Environment :: Web Environment",
-        "Environment :: Plugins",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2.7",
-        "Topic :: Internet :: WWW/HTTP",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: Database",
+        
     ],
     keywords='cassandra,cql,pandas',
     install_requires = ['cassandra-driver >= 2.1.0', 'pandas >= 0.15.0'],
