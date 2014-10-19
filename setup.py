@@ -25,7 +25,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords='cassandra,cql,pandas',
-    install_requires = ['cassandra-driver >= 2.1.0', 'pandas >= 1.7.2'],
+    install_requires = ['cassandra-driver >= 2.1.0', 'pandas >= 0.15.0'],
     author='Jon Haddad',
     author_email='jon@jonhaddad.com',
     url='https://github.com/rustyrazorblade/ironeagle',
