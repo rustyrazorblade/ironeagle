@@ -1,6 +1,6 @@
 from cassandra.cluster import Cluster
 from pandas import DataFrame
-
+import pytest
 from ironeagle import get_prepared_statement
 
 cluster = Cluster()
@@ -14,11 +14,18 @@ tab = """
       """
 session.execute(tab)
 
-df = DataFrame.from_records([(1, "jon"), (2, "pete")],
-                            columns=['id', 'name'])
+@pytest.fixture
+def df():
+    df = DataFrame.from_records([(1, "jon"), (2, "pete")],
+                                columns=['id', 'name'])
+    return df
 
 
-def test_get_prepared_statement():
+
+def test_get_prepared_statement(df):
     prepared = get_prepared_statement(session, df, "simple")
     assert "id, name" in prepared
     assert "(?,?)" in prepared
+
+def test_insert_data():
+    pass
