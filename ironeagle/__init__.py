@@ -1,6 +1,8 @@
 from cassandra.concurrent import execute_concurrent_with_args
 
-def save_dataframe_to_cassandra(session, dataframe, table):
+import pandas
+
+def save_dataframe_to_cassandra(session, dataframe, table, types=None):
     """
 
     :param session:
@@ -10,9 +12,13 @@ def save_dataframe_to_cassandra(session, dataframe, table):
     :param table:
     :return:
     """
+
+
     statement = get_prepared_statement(dataframe, table)
 
     prepared = session.prepare(statement)
+
+    dataframe = dataframe.where(dataframe.notnull(), None)
 
     def dgenerator():
         for x in dataframe.itertuples(index=False):
