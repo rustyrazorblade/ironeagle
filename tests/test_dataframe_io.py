@@ -28,7 +28,7 @@ def session():
                     name text,
                     gsn_flag text,
                     hcn_flag text,
-                    wmo_id float
+                    wmo_id text
                 )
                 """
 
@@ -53,6 +53,8 @@ def stations():
     stations = read_fwf("tests/ghcnd-stations.txt", header=None,
                         colspecs=[(0,11), (12, 20), (21, 30), (31,37), (38,40), (41,71), (72,75), (76,79), (80,85)],
                         names=["station_id", "lat", "long", "elevation", "state", "name", "gsn_flag", "hcn_flag", "wmo_id"])
+
+    stations['wmo_id'] = stations['wmo_id'].astype(str)
     return stations
 
 
